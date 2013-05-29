@@ -8,7 +8,6 @@ Usage
 
 You have to define @JSON() annotation to run the lib.
 ```php
-<?php
     /**
      * @JSON(name='test', type='string', required=true)
      * @var string
@@ -22,7 +21,6 @@ Available parameters:
 
 You can use regular phpDoc type annotations
 ```php
-<?php
     /**
      * @var string
      */
@@ -44,7 +42,6 @@ Typecast is working for all built in types and custom classes.
 Example
 -------
 ```php
-<?php
     class Something {
         /**
          * @JSON(name='changed')
