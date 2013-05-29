@@ -6,7 +6,7 @@ JSON encoder decoder with typecast using type annotations in the phpDoc comment.
 Usage
 -----
 
-* You have to define @JSON() annotation to run the lib.
+You have to define @JSON() annotation to run the lib.
 
     /**
      * @JSON(name='test', type='string', required=true)
@@ -19,7 +19,7 @@ Usage
                       Type definition in the phpDoc have bigger priority.
         required    - required field flag, drops exception if required field is missing in the JSON data (optional)
 
-* You can use regular phpDoc type annotations
+You can use regular phpDoc type annotations
 
     /**
      * @var string
@@ -28,7 +28,7 @@ Usage
      * @type int
      */
 
-* Typecast is working for all built in types and custom classes.
+Typecast is working for all built in types and custom classes.
 
     'int',      'integer' , 'Integer' ,
     'double',   'Double',   'float',
