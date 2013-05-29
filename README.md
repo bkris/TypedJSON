@@ -23,15 +23,15 @@ Typecast is working for all built in types and custom classes.
 Example
 -------
 
-class Something {
-  /**
+    class Something {
+	/**
 	 * @JSON(name='changed')
 	 * @var string
 	 */
 	public $param;
-}
+    }
 
-class Test {
+    class Test {
 	
 	/**
 	 * @JSON(name='test', type='string', required=true)
@@ -61,9 +61,9 @@ class Test {
 	 */
 	public $param6 = null;
 	
-}
+    }
 
-$data = '{
+    $data = '{
 	"test" : "aaa",
 	"param2" : [1, 2, 3, 4, 5],
 	"param3" : {
@@ -75,13 +75,13 @@ $data = '{
 		{"changed" : "test3"}
 	],
 	"param5" : "asdasdasda"
-}';
+    }';
 
-$dataParsed = TypedJSON::decode($data, 'Test');
+    $dataParsed = TypedJSON::decode($data, 'Test');
 
-print_r($dataParsed);
-echo "\n";
-echo $data;
-echo "\n";
-echo TypedJSON::encode($dataParsed);
-echo "\n";
+    print_r($dataParsed);
+    echo "\n";
+    echo $data;
+    echo "\n";
+    echo TypedJSON::encode($dataParsed);
+    echo "\n";
