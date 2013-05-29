@@ -13,11 +13,11 @@ You have to define @JSON() annotation to run the lib.
      * @var string
      */
 
-    Available parameters:
-        name        - parameter name in the JSON structure (optional)
-        type        - type of the parameter (optional), it can be defined in phpDoc.
-                      Type definition in the phpDoc have bigger priority.
-        required    - required field flag, drops exception if required field is missing in the JSON data (optional)
+Available parameters:
+    name        - parameter name in the JSON structure (optional)
+    type        - type of the parameter (optional), it can be defined in phpDoc.
+                  Type definition in the phpDoc have bigger priority.
+    required    - required field flag, drops exception if required field is missing in the JSON data (optional)
 
 You can use regular phpDoc type annotations
 
