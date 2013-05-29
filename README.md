@@ -26,7 +26,7 @@ You can use regular phpDoc type annotations
     /**
      * @var string
      */
-    /*
+    /**
      * @type int
      */
 ```
