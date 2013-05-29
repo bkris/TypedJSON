@@ -7,12 +7,12 @@ Usage
 -----
 
 You have to define @JSON() annotation to run the lib.
-
+'''php
     /**
      * @JSON(name='test', type='string', required=true)
      * @var string
      */
-
+'''
 Available parameters:
 * name        - parameter name in the JSON structure (optional)
 * type        - type of the parameter (optional), it can be defined in phpDoc.
@@ -20,14 +20,14 @@ Available parameters:
 * required    - required field flag, drops exception if required field is missing in the JSON data (optional)
 
 You can use regular phpDoc type annotations
-
+'''php
     /**
      * @var string
      */
     /*
      * @type int
      */
-
+'''
 Typecast is working for all built in types and custom classes.
 
     'int',      'integer' , 'Integer' ,
@@ -41,7 +41,7 @@ Typecast is working for all built in types and custom classes.
 
 Example
 -------
-
+'''pgp
     class Something {
         /**
          * @JSON(name='changed')
@@ -104,3 +104,4 @@ Example
     echo "\n";
     echo TypedJSON::encode($dataParsed);
     echo "\n";
+'''
