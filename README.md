@@ -1,23 +1,25 @@
 TypedJSON
 =========
 
-JSON encoder decoder with typecast using type annotations in the phpDoc comment
+JSON encoder decoder with typecast using type annotations in the phpDoc comment.
 
 Usage
 -----
 
-You have to define @JSON() annotation to run the lib. 
-    Available parameters:
-        name        - parameter name in the JSON structure
-        type        - type of the parameter (optional), it can be defined in phpDoc
-        required    - required field flag, drops exception if required field is missing in the JSON data
+* You have to define @JSON() annotation to run the lib.
 
     /**
      * @JSON(name='test', type='string', required=true)
      * @var string
      */
 
-You can use regular phpDoc type annotations
+    Available parameters:
+        name        - parameter name in the JSON structure (optional)
+        type        - type of the parameter (optional), it can be defined in phpDoc.
+                      Type definition in the phpDoc have bigger priority.
+        required    - required field flag, drops exception if required field is missing in the JSON data (optional)
+
+* You can use regular phpDoc type annotations
 
     /**
      * @var string
@@ -26,7 +28,16 @@ You can use regular phpDoc type annotations
      * @type int
      */
 
-Typecast is working for all built in types and custom classes.
+* Typecast is working for all built in types and custom classes.
+
+    'int',      'integer' , 'Integer' ,
+    'double',   'Double',   'float',
+    'Float',    'number',   'Number',
+    'real',     'Real',     'bool',
+    'boolean',  'Boolean',   'string',
+    'String',   'array',    'Array',
+    'object',   'Object',
+    'unknown_type', 'mixed'
 
 Example
 -------
@@ -72,17 +83,17 @@ Example
     }
 
     $data = '{
-    "test" : "aaa",
-    "param2" : [1, 2, 3, 4, 5],
-    "param3" : {
-        "changed" : "test"
-    },
-    "param4" : [
-        {"changed" : "test1"},
-        {"changed" : "test2"},
-        {"changed" : "test3"}
-    ],
-    "param5" : "asdasdasda"
+        "test" : "aaa",
+        "param2" : [1, 2, 3, 4, 5],
+        "param3" : {
+            "changed" : "test"
+        },
+        "param4" : [
+            {"changed" : "test1"},
+            {"changed" : "test2"},
+            {"changed" : "test3"}
+        ],
+        "param5" : "asdasdasda"
     }';
 
     $dataParsed = TypedJSON::decode($data, 'Test');

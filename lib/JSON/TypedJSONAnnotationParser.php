@@ -16,10 +16,10 @@ class TypedJSONAnnotationParser {
 	 * @var ReflectionClass
 	 */
 	private $reflectionClass = null;
-	
-	/**
-	 * @param string $type
-	 */
+
+    /**
+     * @param string $class
+     */
 	public function __construct($class) {
 		$this->class = $class;
 		$this->reflectionClass = new ReflectionClass($class);
@@ -61,15 +61,15 @@ class TypedJSONAnnotationParser {
 		$annotation = new TypedJSONAnnotation();
 		$annotation->nameOfProperty = $propName;
 		
-		$maches = array();
-		$numOfMatches = preg_match_all($ANNOTATION_PARSER, $commentBlock, $maches);
+		$matches = array();
+		$numOfMatches = preg_match_all($ANNOTATION_PARSER, $commentBlock, $matches);
 		
-		if ($this->getRegexValue($maches['isJson'])) {
+		if ($this->getRegexValue($matches['isJson'])) {
 			
-			$annotation->name = $this->getRegexValue($maches['name']);
-			$type = $this->getRegexValue($maches['type']);
-			$phpDocVar = $this->getRegexValue($maches['phpDocVar']);
-			$phpDocType = $this->getRegexValue($maches['phpDocType']);
+			$annotation->name = $this->getRegexValue($matches['name']);
+			$type = $this->getRegexValue($matches['type']);
+			$phpDocVar = $this->getRegexValue($matches['phpDocVar']);
+			$phpDocType = $this->getRegexValue($matches['phpDocType']);
 			
 			if ($phpDocVar) {
 				$annotation->type = $phpDocVar;
@@ -93,7 +93,7 @@ class TypedJSONAnnotationParser {
 				$annotation->isArray = true;
 			}
 
-			$annotation->required = ( $this->getRegexValue($maches['required']) == "true" ? true : false );
+			$annotation->required = ( $this->getRegexValue($matches['required']) == "true" ? true : false );
 			
 			return $annotation;
 		}

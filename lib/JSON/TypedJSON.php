@@ -4,23 +4,27 @@ include_once "lib/JSON/TypedJSONAnnotationParser.php";
 include_once 'lib/misc/CastClass.php';
 include_once 'lib/JSON/Exceptions.php';
 
+/**
+ * Class TypedJSON
+ * @version 1.0
+ */
 class TypedJSON {
 	
 	private static $BUILT_IN_TYPES = array( 'int', 		'integer' , 'Integer' ,
 											'double', 	'Double', 	'float',
 											'Float', 	'number', 	'Number',
 											'real', 	'Real', 	'bool',
-											'boolean', 	'Bolean', 	'string',
+											'boolean', 	'Boolean', 	'string',
 											'String', 	'array', 	'Array',
-											'object', 	'Object', 	'unknown_type');
+											'object', 	'Object', 	'unknown_type', 'mixed');
 
-	/**
-	 * Decode JSON string and cast to defined class
-	 * @param string $data
-	 * @param string $type
-	 * @throws JSONParseException
-	 * @return {$type}
-	 */
+    /**
+     * Decode JSON string and cast to defined class
+     * @param string $data
+     * @param string $type
+     * @throws JSONParseException
+     * @return mixed {$type}
+     */
 	public static function decode($data, $type = null) {
 		
 		$decodedData = json_decode(str_replace("\\", "", $data));
@@ -45,8 +49,8 @@ class TypedJSON {
 		
 		$encoded =  json_encode( $data );
 		
-		$calssName = get_class($data);
-		foreach ( self::getListOfNamesDifferFromParameterNames($calssName) as $key => $name) {
+		$className = get_class($data);
+		foreach ( self::getListOfNamesDifferFromParameterNames($className) as $key => $name) {
 			// have to surround with " because have to find the exact variable name in the json string 
 			$encoded = str_replace("\"".$key."\"", "\"".$name."\"", $encoded);
 		}
@@ -92,11 +96,11 @@ class TypedJSON {
 	 * Recursive function for casting object structure to defined type
 	 * 
 	 * @param string $type
-	 * @param unknown_type $value
+	 * @param mixed $value
 	 * @throws JSONTypeCastException
 	 * @throws JSONParameterTypeException
 	 * @throws JSONMissingParameterException
-	 * @return unknown_type
+	 * @return mixed
 	 */
 	private static function castAll($type, $value) {
 		
@@ -168,13 +172,13 @@ class TypedJSON {
 		}
 		return false;
 	}
-	
-	/**
-	 * Casts value to built in type
-	 * @param string $type
-	 * @param unknown_type $value
-	 * @return {@type}
-	 */
+
+    /**
+     * Casts value to built in type
+     * @param string $type
+     * @param mixed $value
+     * @return array|bool|float|int|mixed|null|object|string
+     */
 	private static function castToType($type, $value) {
 	
 		switch ($type) {
@@ -200,7 +204,7 @@ class TypedJSON {
 			//logical type alternatives
 			case 'bool':
 			case 'boolean' :
-			case 'Bolean' :
+			case 'Boolean' :
 				return (bool)$value;
 				break;
 					
@@ -222,8 +226,9 @@ class TypedJSON {
 				return (object)$value;
 				break;
 
-			//no tipe definition added
+			//no type definition added
 			case 'unknown_type' :
+            case 'mixed' :
 				return $value;
 				break;
 				
